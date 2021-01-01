@@ -13,6 +13,18 @@ class HomeWidget extends RootWidget<HomeViewModel> {
   @override
   Widget widget(HomeViewModel model) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Contactos estrechos"),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: Chip(
+              label: Text("${model.total} en total"),
+              backgroundColor: Colors.white,
+            ),
+          ),
+        ],
+      ),
       body: withProgress(
           body: model.latestHistory.isEmpty
               ? _emptyCase()
@@ -52,7 +64,11 @@ class HomeWidget extends RootWidget<HomeViewModel> {
                     ),
                   ),
                 ),
-                Chip(label: Text("${history.length} veces")),
+                Chip(
+                  label: Text("${history.length} veces"),
+                  backgroundColor: Colors.white,
+                  shape: StadiumBorder(side: BorderSide(color: Colors.blue)),
+                ),
               ],
             ),
           ),

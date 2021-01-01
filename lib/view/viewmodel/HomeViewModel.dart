@@ -9,10 +9,13 @@ class HomeViewModel extends RootViewModel {
   final ContactRepository _repository;
 
   Map<Contact, List<History>> _latestHistory = Map();
+  int _total = 0;
 
   HomeViewModel(this._repository);
 
   Map<Contact, List<History>> get latestHistory => _latestHistory;
+
+  int get total => _total;
 
   @override
   initialize() async {
@@ -23,6 +26,12 @@ class HomeViewModel extends RootViewModel {
     showProgress();
 
     _latestHistory = await _repository.getHistory();
+
+    for (final history in _latestHistory.values) {
+      _total += history.length;
+    }
+
+    notify();
 
     hideProgress();
   }
