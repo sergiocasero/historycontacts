@@ -21,14 +21,7 @@ class AddWidget extends RootWidget<AddViewModel> {
       appBar: AppBar(
         title: Text("Añadir contacto estrecho"),
       ),
-      body: withProgress(
-          body: ListView(
-            children: [
-              _newContact(),
-              _contactsList(model),
-            ],
-          ),
-          model: model),
+      body: withProgress(body: _contactsList(model), model: model),
     );
   }
 
@@ -89,15 +82,16 @@ class AddWidget extends RootWidget<AddViewModel> {
   Widget _contactsList(AddViewModel model) {
     return Column(
       children: [
-        Text("O selecciona uno"),
-        Container(
-          child: ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            itemBuilder: (ctx, index) {
-              return _contactItem(model.contacts[index], model);
-            },
-            itemCount: model.contacts.length,
+        Text("Selecciona un contacto para registrarlo en la app"),
+        Expanded(
+          child: Container(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (ctx, index) {
+                return _contactItem(model.contacts[index], model);
+              },
+              itemCount: model.contacts.length,
+            ),
           ),
         ),
       ],
