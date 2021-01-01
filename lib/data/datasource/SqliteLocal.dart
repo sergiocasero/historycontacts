@@ -10,7 +10,17 @@ class SqliteLocal extends Local {
 
   @override
   Future<Map<Contact, List<History>>> getHistory() async {
-    return await Map();
+    Map<Contact, List<History>> map = Map();
+
+    final contacts = await getContacts();
+
+    for (final contact in contacts) {
+      final history = await _db.rawQuery("SELECT * FROM HISTORY WHERE id_contact = ${contact.id}");
+
+      map[contact] = history.map((e) => History.fromMap(e)).toList();
+    }
+
+    return map;
   }
 
   @override

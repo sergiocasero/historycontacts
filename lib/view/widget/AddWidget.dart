@@ -43,7 +43,7 @@ class AddWidget extends RootWidget<AddViewModel> {
               padding: const EdgeInsets.all(4.0),
               child: Text("Añádelo"),
             ),
-            _input("Nombre", Icons.person, (value) {
+            _input("Nombre *", Icons.person, (value) {
               _name = value;
             }),
             _input("Apellidos", Icons.person_outline, (value) {

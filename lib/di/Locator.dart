@@ -30,7 +30,7 @@ void _data() async {
 
       final createHistoryQuery = '''CREATE TABLE history(
       id INTEGER PRIMARY KEY,
-      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+      timestamp INTEGER,
       id_contact INTEGER
     );''';
 

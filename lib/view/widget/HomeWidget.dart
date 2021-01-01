@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:historycontacts/di/Locator.dart';
 import 'package:historycontacts/domain/entity/Contact.dart';
+import 'package:historycontacts/domain/entity/History.dart';
 import 'package:historycontacts/view/viewmodel/HomeViewModel.dart';
 import 'package:historycontacts/view/widget/RootWidget.dart';
 
@@ -17,7 +18,12 @@ class HomeWidget extends RootWidget<HomeViewModel> {
               : ListView.builder(
                   itemCount: model.latestHistory.keys.length,
                   itemBuilder: (ctx, index) {
-                    return _contactHistory(model.latestHistory.keys.toList()[index]);
+                    final contact = model.latestHistory.keys.toList()[index];
+                    print(model.latestHistory);
+                    return _contactHistory(
+                      contact,
+                      model.latestHistory[contact],
+                    );
                   },
                 ),
           model: model),
@@ -29,8 +35,45 @@ class HomeWidget extends RootWidget<HomeViewModel> {
     );
   }
 
-  Widget _contactHistory(Contact list) {
-    return Text("Hello");
+  Widget _contactHistory(Contact contact, List<History> history) {
+    return Card(
+      child: Column(
+        children: [
+          Text("${contact.name} ${contact.surname}"),
+          Container(
+            height: 60,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: history.length,
+              itemBuilder: (ctx, index) {
+                return _history(history[index]);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _history(History history) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        color: Colors.blue,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Text(
+              history.timestamp.toString(),
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _emptyCase() {

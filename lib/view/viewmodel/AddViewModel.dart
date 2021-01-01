@@ -32,7 +32,7 @@ class AddViewModel extends RootViewModel {
   void onSaveHistoryPressed(int id, Contact contact) async {
     showProgress();
 
-    final history = History(idContact: id);
+    final history = History(idContact: id, timestamp: DateTime.now());
 
     await _repository.addHistory(history);
 
