@@ -24,4 +24,8 @@ class HomeViewModel extends RootViewModel {
 
     hideProgress();
   }
+
+  void onAddPressed() {
+
+  }
 }
