@@ -1,6 +1,6 @@
 class History {
     int id;
-    String idContact;
+    int idContact;
     DateTime timestamp;
 
     History({this.id, this.idContact, this.timestamp});

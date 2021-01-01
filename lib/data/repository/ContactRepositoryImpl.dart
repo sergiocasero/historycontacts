@@ -9,19 +9,22 @@ class ContactRepositoryImpl extends ContactRepository {
   ContactRepositoryImpl(this._local);
 
   @override
-  Future<void> addContact(Contact contact) {
-    // TODO: implement addContact
-    throw UnimplementedError();
+  Future<int> addContact(Contact contact) {
+    return _local.addContact(contact);
   }
 
   @override
   Future<void> addHistory(History history) {
-    // TODO: implement addHistory
-    throw UnimplementedError();
+    _local.addHistory(history);
   }
 
   @override
   Future<Map<Contact, List<History>>> getHistory() {
     return _local.getHistory();
+  }
+
+  @override
+  Future<List<Contact>> getContacts() {
+    return _local.getContacts();
   }
 }

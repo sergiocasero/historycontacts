@@ -6,5 +6,7 @@ abstract class ContactRepository {
 
   Future<void> addHistory(History history);
 
-  Future<void> addContact(Contact contact);
+  Future<int> addContact(Contact contact);
+
+  Future<List<Contact>> getContacts();
 }

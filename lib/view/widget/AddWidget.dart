@@ -44,16 +44,16 @@ class AddWidget extends RootWidget<AddViewModel> {
               child: Text("Añádelo"),
             ),
             _input("Nombre", Icons.person, (value) {
-              value = _name;
+              _name = value;
             }),
             _input("Apellidos", Icons.person_outline, (value) {
-              value = _surname;
+              _surname = value;
             }),
             _input("Dirección", Icons.location_on, (value) {
-              value = _address;
+              _address = value;
             }),
             _input("Teléfono", Icons.phone, (value) {
-              value = _phone;
+              _phone = value;
             }),
             RaisedButton.icon(
               icon: Icon(Icons.save),
@@ -79,7 +79,7 @@ class AddWidget extends RootWidget<AddViewModel> {
     );
   }
 
-  void _onSavePressed(AddViewModel model) {
+  void _onSavePressed(AddViewModel model) async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       model.onAddContactPressed(_name, _surname, _address, _phone);

@@ -18,26 +18,24 @@ Future<void> initializeDI() async {
 void _data() async {
   final db = await openDatabase(
     "history.db",
-    version: 1,
+    version: 2,
     onCreate: (db, version) async {
-
-      final createContactQuery ='''CREATE TABLE contact(
+      final createContactQuery = '''CREATE TABLE contact(
       id INTEGER PRIMARY KEY,
       name TEXT,
       surname TEXT,
       phone TEXT,
-      address TEXT,
+      address TEXT
     );''';
 
-      final createHistoryQuery = '''
-        CREATE TABLE history(
+      final createHistoryQuery = '''CREATE TABLE history(
       id INTEGER PRIMARY KEY,
       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
       id_contact INTEGER
-    );
-      ''';
+    );''';
 
-      return db.execute(createContactQuery + createHistoryQuery);
+      await db.execute(createContactQuery);
+      await db.execute(createHistoryQuery);
     },
   );
 
