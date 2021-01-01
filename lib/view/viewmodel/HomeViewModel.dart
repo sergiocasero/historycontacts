@@ -8,7 +8,7 @@ import 'package:historycontacts/view/widget/AddWidget.dart';
 class HomeViewModel extends RootViewModel {
   final ContactRepository _repository;
 
-  Map<Contact, List<History>> _latestHistory;
+  Map<Contact, List<History>> _latestHistory = Map();
 
   HomeViewModel(this._repository);
 

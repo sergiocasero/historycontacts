@@ -23,7 +23,7 @@ class HomeWidget extends RootWidget<HomeViewModel> {
           model: model),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => model.onAddPressed(),
-        label: Text("Añadir"),
+        label: Text("Registrar"),
         icon: Icon(Icons.add),
       ),
     );

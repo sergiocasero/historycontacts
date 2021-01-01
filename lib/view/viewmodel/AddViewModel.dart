@@ -5,6 +5,10 @@ import 'package:historycontacts/view/viewmodel/RootViewModel.dart';
 class AddViewModel extends RootViewModel {
   final ContactRepository _repository;
 
+  List<Contact> _contacts = [];
+
+  List<Contact> get contacts => _contacts;
+
   AddViewModel(this._repository);
 
   @override
