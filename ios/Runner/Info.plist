@@ -41,5 +41,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>NSContactsUsageDescription</key>
+    <string>Necesitamos el permiso de contactos solamente para facilitarte la tarea y que no tengas que introducirlos a mano, podrás usar la app sin él.</string>
 </dict>
 </plist>

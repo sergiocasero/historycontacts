@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sergiocasero.historycontacts">
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="Contactos estrechos">

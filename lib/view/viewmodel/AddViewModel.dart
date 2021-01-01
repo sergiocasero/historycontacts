@@ -1,8 +1,10 @@
+import 'package:contacts_service/contacts_service.dart' as Service;
 import 'package:get/get.dart';
 import 'package:historycontacts/domain/ContactRepository.dart';
 import 'package:historycontacts/domain/entity/Contact.dart';
 import 'package:historycontacts/domain/entity/History.dart';
 import 'package:historycontacts/view/viewmodel/RootViewModel.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AddViewModel extends RootViewModel {
   final ContactRepository _repository;
@@ -20,6 +22,22 @@ class AddViewModel extends RootViewModel {
 
   void _getContacts() async {
     showProgress();
+
+    if (!await _repository.hasAskedForContacts()) {
+      final isGranted = await Permission.contacts.request().isGranted;
+      await _repository.setAskedForContacts(true);
+
+      if (isGranted) {
+        Iterable<Service.Contact> contacts = await Service.ContactsService.getContacts();
+        _repository.addContacts(contacts
+            .map((e) => Contact(
+                name: e.displayName,
+                surname: e.middleName,
+                phone: e.phones.isEmpty ? "" : e.phones.first.value,
+                address: e.postalAddresses.isEmpty ? "" : e.postalAddresses.first.toString()))
+            .toList());
+      }
+    }
 
     final contacts = await _repository.getContacts();
     _contacts.clear();

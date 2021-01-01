@@ -5,6 +5,7 @@ import 'package:historycontacts/data/repository/ContactRepositoryImpl.dart';
 import 'package:historycontacts/domain/ContactRepository.dart';
 import 'package:historycontacts/view/viewmodel/AddViewModel.dart';
 import 'package:historycontacts/view/viewmodel/HomeViewModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 final getIt = GetIt.I;
@@ -39,8 +40,10 @@ void _data() async {
     },
   );
 
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
   // DATA
-  getIt.registerSingleton<Local>(SqliteLocal(db));
+  getIt.registerSingleton<Local>(SqliteLocal(db, prefs));
   getIt.registerSingleton<ContactRepository>(ContactRepositoryImpl(getIt.get()));
 }
 

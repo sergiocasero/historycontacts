@@ -9,4 +9,10 @@ abstract class ContactRepository {
   Future<int> addContact(Contact contact);
 
   Future<List<Contact>> getContacts();
+
+  Future<bool> hasAskedForContacts();
+
+  Future<void> setAskedForContacts(bool value);
+
+  Future<void> addContacts(List<Contact> list);
 }

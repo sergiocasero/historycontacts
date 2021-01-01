@@ -18,8 +18,10 @@ dependencies:
   get:
   floating_action_bubble: 1.0.9
   intl:
-
+  contacts_service: ^0.4.6
+  shared_preferences: ^0.5.12+4
   cupertino_icons: ^1.0.1
+  permission_handler: ^5.0.1+1
 
 dev_dependencies:
   flutter_test:

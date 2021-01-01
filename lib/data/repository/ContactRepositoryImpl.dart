@@ -15,7 +15,7 @@ class ContactRepositoryImpl extends ContactRepository {
 
   @override
   Future<void> addHistory(History history) {
-    _local.addHistory(history);
+    return _local.addHistory(history);
   }
 
   @override
@@ -26,5 +26,20 @@ class ContactRepositoryImpl extends ContactRepository {
   @override
   Future<List<Contact>> getContacts() {
     return _local.getContacts();
+  }
+
+  @override
+  Future<bool> hasAskedForContacts() {
+    return _local.hasAskedForContacts();
+  }
+
+  @override
+  Future<void> setAskedForContacts(bool value) {
+    return _local.setAskedForContacts(value);
+  }
+
+  @override
+  Future<void> addContacts(List<Contact> list) {
+    return _local.addContacts(list);
   }
 }
