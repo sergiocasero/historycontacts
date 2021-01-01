@@ -38,7 +38,7 @@ class AddViewModel extends RootViewModel {
 
     hideProgress();
 
-    Get.back();
+    Get.back(result: true);
   }
 
   void onAddContactPressed(String name, String surname, String address, String phone) async {

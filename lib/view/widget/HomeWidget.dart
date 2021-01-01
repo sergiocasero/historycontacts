@@ -90,7 +90,7 @@ class HomeWidget extends RootWidget<HomeViewModel> {
   Widget _history(History history) {
     final date = DateFormat("dd/MM/yy 'a las' HH:mm").format(history.timestamp);
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 4.0, top: 8.0),
       child: Card(
         color: Colors.blue,
         child: Padding(

@@ -27,6 +27,7 @@ class HomeViewModel extends RootViewModel {
 
     _latestHistory = await _repository.getHistory();
 
+    _total = 0;
     for (final history in _latestHistory.values) {
       _total += history.length;
     }
@@ -36,7 +37,10 @@ class HomeViewModel extends RootViewModel {
     hideProgress();
   }
 
-  void onAddPressed() {
-    Get.to(AddWidget());
+  void onAddPressed() async {
+    final bool isAdded = await Get.to(AddWidget());
+    if (isAdded != null) {
+      _getHistory();
+    }
   }
 }
