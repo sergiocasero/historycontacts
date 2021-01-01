@@ -10,8 +10,9 @@ class AddViewModel extends RootViewModel {
   final ContactRepository _repository;
 
   List<Contact> _contacts = [];
+  List<Contact> _filteredContacts = [];
 
-  List<Contact> get contacts => _contacts;
+  List<Contact> get contacts => _filteredContacts;
 
   AddViewModel(this._repository);
 
@@ -40,6 +41,8 @@ class AddViewModel extends RootViewModel {
     }
 
     final contacts = await _repository.getContacts();
+    _filteredContacts.clear();
+    _filteredContacts.addAll(contacts);
     _contacts.clear();
     _contacts.addAll(contacts);
     notify();
@@ -74,5 +77,12 @@ class AddViewModel extends RootViewModel {
     onSaveHistoryPressed(idContact, contact);
 
     hideProgress();
+  }
+
+  void onChanged(String value) {
+    List<Contact> filtered = _contacts.where((e) => e.name.toLowerCase().contains(value.toLowerCase())).toList();
+    _filteredContacts.clear();
+    _filteredContacts.addAll(filtered);
+    notify();
   }
 }

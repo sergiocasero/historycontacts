@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:historycontacts/di/Locator.dart';
 import 'package:historycontacts/domain/entity/Contact.dart';
 import 'package:historycontacts/view/viewmodel/AddViewModel.dart';
@@ -22,20 +23,22 @@ class AddWidget extends RootWidget<AddViewModel> {
         title: Text("Añadir contacto estrecho"),
       ),
       body: withProgress(body: _contactsList(model), model: model),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _newContact(),
+        label: Text("Añadir contacto"),
+        icon: Icon(Icons.add),
+      ),
     );
   }
 
   Widget _newContact() {
-    return Form(
-      key: _formKey,
-      child: Card(
+    Get.dialog(AlertDialog(
+      title: Text("Añadir contacto"),
+      content: Form(
+        key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Text("Añádelo"),
-            ),
             _input("Nombre *", Icons.person, (value) {
               _name = value;
             }),
@@ -48,15 +51,17 @@ class AddWidget extends RootWidget<AddViewModel> {
             _input("Teléfono", Icons.phone, (value) {
               _phone = value;
             }),
-            RaisedButton.icon(
-              icon: Icon(Icons.save),
-              label: Text("Guardar y registrar"),
-              onPressed: () => _onSavePressed(model),
-            ),
           ],
         ),
       ),
-    );
+      actions: [
+        FlatButton.icon(
+          icon: Icon(Icons.save),
+          label: Text("Guardar"),
+          onPressed: () => _onSavePressed(model),
+        ),
+      ],
+    ));
   }
 
   Widget _input(String hint, IconData icon, Function(String) onSave) {
@@ -83,6 +88,16 @@ class AddWidget extends RootWidget<AddViewModel> {
     return Column(
       children: [
         Text("Selecciona un contacto para registrarlo en la app"),
+        Padding(
+          padding: const EdgeInsets.only(top: 4.0, left: 4.0, right: 4.0),
+          child: TextFormField(
+            decoration: InputDecoration(
+              hintText: "Buscar",
+              icon: Icon(Icons.search),
+            ),
+            onChanged: (value) => model.onChanged(value),
+          ),
+        ),
         Expanded(
           child: Container(
             child: ListView.builder(
