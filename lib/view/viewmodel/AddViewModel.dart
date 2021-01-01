@@ -29,7 +29,17 @@ class AddViewModel extends RootViewModel {
     hideProgress();
   }
 
-  void onSavePressed(Contact contact) {}
+  void onSaveHistoryPressed(int id, Contact contact) async {
+    showProgress();
+
+    final history = History(idContact: id);
+
+    await _repository.addHistory(history);
+
+    hideProgress();
+
+    Get.back();
+  }
 
   void onAddContactPressed(String name, String surname, String address, String phone) async {
     showProgress();
@@ -43,12 +53,8 @@ class AddViewModel extends RootViewModel {
 
     final idContact = await _repository.addContact(contact);
 
-    final history = History(idContact: idContact);
-
-    await _repository.addHistory(history);
+    onSaveHistoryPressed(idContact, contact);
 
     hideProgress();
-
-    Get.back();
   }
 }

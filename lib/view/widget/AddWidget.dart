@@ -91,12 +91,11 @@ class AddWidget extends RootWidget<AddViewModel> {
       children: [
         Text("O selecciona uno"),
         Container(
-          color: Colors.red,
           child: ListView.builder(
             shrinkWrap: true,
             primary: false,
             itemBuilder: (ctx, index) {
-              return _contactItem(model.contacts[index]);
+              return _contactItem(model.contacts[index], model);
             },
             itemCount: model.contacts.length,
           ),
@@ -105,7 +104,37 @@ class AddWidget extends RootWidget<AddViewModel> {
     );
   }
 
-  Widget _contactItem(Contact contact) {
-    return Container();
+  Widget _contactItem(Contact contact, AddViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Card(
+        child: ListTile(
+          onTap: () => model.onSaveHistoryPressed(contact.id, contact),
+          leading: CircleAvatar(
+            child: Text(contact.name.substring(0, 1)),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text("${contact.name} ${contact.surname}"),
+          ),
+          subtitle: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.location_on),
+                  Text(contact.address),
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(Icons.phone),
+                  Text(contact.phone),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

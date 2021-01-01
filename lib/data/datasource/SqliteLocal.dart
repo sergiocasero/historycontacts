@@ -25,7 +25,7 @@ class SqliteLocal extends Local {
 
   @override
   Future<List<Contact>> getContacts() async {
-    final query = await _db.query("SELECT * FROM contact");
+    final query = await _db.query("contact");
     return query.map((e) => Contact.fromMap(e)).toList();
   }
 }
