@@ -18,11 +18,24 @@ void _data() async {
     "history.db",
     version: 1,
     onCreate: (db, version) async {
-      return db.execute('''CREATE TABLE poi(
-      id text,
-      title text,
-      geocoordinates text
-    );''');
+
+      final createContactQuery ='''CREATE TABLE contact(
+      id INTEGER PRIMARY KEY,
+      name TEXT,
+      surname TEXT,
+      phone TEXT,
+      address TEXT,
+    );''';
+
+      final createHistoryQuery = '''
+        CREATE TABLE history(
+      id INTEGER PRIMARY KEY,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+      id_contact INTEGER
+    );
+      ''';
+
+      return db.execute(createContactQuery + createHistoryQuery);
     },
   );
 
