@@ -78,7 +78,7 @@ class HomeWidget extends RootWidget<HomeViewModel> {
               scrollDirection: Axis.horizontal,
               itemCount: history.length,
               itemBuilder: (ctx, index) {
-                return _history(history[index]);
+                return _history(model, history[index]);
               },
             ),
           ),
@@ -87,7 +87,7 @@ class HomeWidget extends RootWidget<HomeViewModel> {
     );
   }
 
-  Widget _history(History history) {
+  Widget _history(HomeViewModel model, History history) {
     final date = DateFormat("dd/MM/yy 'a las' HH:mm").format(history.timestamp);
     return Padding(
       padding: const EdgeInsets.only(left: 4.0, top: 8.0),

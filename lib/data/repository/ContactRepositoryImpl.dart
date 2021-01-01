@@ -42,4 +42,9 @@ class ContactRepositoryImpl extends ContactRepository {
   Future<void> addContacts(List<Contact> list) {
     return _local.addContacts(list);
   }
+
+  @override
+  Future<void> deleteHistory(int id) {
+    return _local.deleteHistory(id);
+  }
 }

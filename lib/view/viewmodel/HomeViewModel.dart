@@ -25,13 +25,13 @@ class HomeViewModel extends RootViewModel {
   void _getHistory() async {
     showProgress();
 
+    _latestHistory.clear();
     _latestHistory = await _repository.getHistory();
 
     _total = 0;
     for (final history in _latestHistory.values) {
       _total += history.length;
     }
-
     notify();
 
     hideProgress();
@@ -42,5 +42,10 @@ class HomeViewModel extends RootViewModel {
     if (isAdded != null) {
       _getHistory();
     }
+  }
+
+  void onDeleteHistory(History history) async {
+    await _repository.deleteHistory(history.id);
+    _getHistory();
   }
 }

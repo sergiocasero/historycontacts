@@ -15,4 +15,6 @@ abstract class ContactRepository {
   Future<void> setAskedForContacts(bool value);
 
   Future<void> addContacts(List<Contact> list);
+
+  Future<void> deleteHistory(int id);
 }

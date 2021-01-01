@@ -64,4 +64,9 @@ class SqliteLocal extends Local {
     }
     return batch.commit();
   }
+
+  @override
+  Future<void> deleteHistory(int id) async {
+    return await _db.delete("history", where: 'id = ?', whereArgs: [id]);
+  }
 }
