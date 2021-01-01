@@ -17,6 +17,7 @@ dependencies:
   sqflite: ^1.3.0
   get:
   floating_action_bubble: 1.0.9
+  intl:
 
   cupertino_icons: ^1.0.1
 

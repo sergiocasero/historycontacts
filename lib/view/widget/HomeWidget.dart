@@ -5,6 +5,7 @@ import 'package:historycontacts/domain/entity/Contact.dart';
 import 'package:historycontacts/domain/entity/History.dart';
 import 'package:historycontacts/view/viewmodel/HomeViewModel.dart';
 import 'package:historycontacts/view/widget/RootWidget.dart';
+import 'package:intl/intl.dart';
 
 class HomeWidget extends RootWidget<HomeViewModel> {
   HomeWidget() : super(getIt());
@@ -39,7 +40,22 @@ class HomeWidget extends RootWidget<HomeViewModel> {
     return Card(
       child: Column(
         children: [
-          Text("${contact.name} ${contact.surname}"),
+          Padding(
+            padding: const EdgeInsets.only(left: 12.0, top: 10.0, right: 12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "${contact.name} ${contact.surname}",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Chip(label: Text("${history.length} veces")),
+              ],
+            ),
+          ),
           Container(
             height: 60,
             child: ListView.builder(
@@ -56,6 +72,7 @@ class HomeWidget extends RootWidget<HomeViewModel> {
   }
 
   Widget _history(History history) {
+    final date = DateFormat("dd/MM/yy 'a las' HH:mm").format(history.timestamp);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -64,9 +81,8 @@ class HomeWidget extends RootWidget<HomeViewModel> {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: Text(
-              history.timestamp.toString(),
+              date,
               style: TextStyle(
-                fontSize: 16,
                 color: Colors.white,
               ),
             ),
