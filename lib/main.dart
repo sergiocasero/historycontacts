@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:historycontacts/di/Locator.dart';
 import 'package:historycontacts/view/widget/HomeWidget.dart';
 
@@ -9,11 +10,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      title: 'History contacts',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

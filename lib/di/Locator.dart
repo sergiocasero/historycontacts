@@ -3,6 +3,7 @@ import 'package:historycontacts/data/datasource/Local.dart';
 import 'package:historycontacts/data/datasource/SqliteLocal.dart';
 import 'package:historycontacts/data/repository/ContactRepositoryImpl.dart';
 import 'package:historycontacts/domain/ContactRepository.dart';
+import 'package:historycontacts/view/viewmodel/AddViewModel.dart';
 import 'package:historycontacts/view/viewmodel/HomeViewModel.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -49,4 +50,5 @@ void _domain() async {}
 
 void _view() async {
   getIt.registerFactory<HomeViewModel>(() => HomeViewModel(getIt()));
+  getIt.registerFactory<AddViewModel>(() => AddViewModel(getIt()));
 }
