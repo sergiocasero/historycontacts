@@ -14,8 +14,11 @@ class SqliteLocal extends Local {
 
     final contacts = await getContacts();
 
+    final since = DateTime.now().subtract(Duration(days: 7)).millisecondsSinceEpoch;
+
     for (final contact in contacts) {
-      final history = await _db.rawQuery("SELECT * FROM HISTORY WHERE id_contact = ${contact.id}");
+      final history =
+      await _db.rawQuery("SELECT * FROM HISTORY WHERE " + "id_contact = ${contact.id} AND timestamp > $since");
 
       map[contact] = history.map((e) => History.fromMap(e)).toList();
     }
