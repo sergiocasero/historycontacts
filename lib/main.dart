@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'History contacts',
+      title: 'Contactos estrechos',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
